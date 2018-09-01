@@ -1,7 +1,7 @@
 package rocks.byivo.passwordmeter.measure.score;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,19 +12,26 @@ import rocks.byivo.passwordmeter.measure.score.deductions.PasswordScoreDeduction
 @Service
 public class PasswordScoreCalculator {
 
+    private static final long SMALLEST_BOUNDARY = 0l;
+    private static final long HIGHEST_BOUNDARY = 100l;
+    
     private List<PasswordScoreAdition> scoreAditions;
-    private List<PasswordScoreDeduction> allDeductions;
+    private List<PasswordScoreDeduction> scoreDeductions;
 
     @Autowired
     public PasswordScoreCalculator(List<PasswordScoreAdition> scoreAditions,
-	    List<PasswordScoreDeduction> allDeductions) {
+	    List<PasswordScoreDeduction> scoreDeductions) {
 	super();
 	this.scoreAditions = scoreAditions;
-	this.allDeductions = allDeductions;
+	this.scoreDeductions = scoreDeductions;
     }
 
     public long calculateScoreOf(String rawPassword) {
+	long rawScore = calculateRawScore(rawPassword);
+	return scoreIntoPercentageBoundaries(rawScore);
+    }
 
+    private long calculateRawScore(String rawPassword) {
 	long aditionsScore = calculateAllAditionsFrom(rawPassword);
 	long deductionsScore = calculateAllDeductionsFrom(rawPassword);
 
@@ -32,20 +39,35 @@ public class PasswordScoreCalculator {
     }
 
     private long calculateAllAditionsFrom(String rawPassword) {
-	Optional<Long> counter = scoreAditions.stream()
-		.map(adition -> adition.getTotalBonusFrom(rawPassword))
-		.reduce((last, actual) -> last + actual);
-	
-	return counter.get();
+	return sumAllCalculatedBonusFrom(scoreAditions, rawPassword);
     }
     
     private long calculateAllDeductionsFrom(String rawPassword) {
-	long counter = 0;
-	
-	for (PasswordScoreDeduction passwordScoreDeduction : allDeductions) {
-	    counter +=passwordScoreDeduction.getTotalBonusFrom(rawPassword);
-	}
-	
-	return counter;
+	return sumAllCalculatedBonusFrom(scoreDeductions, rawPassword);
     }
+    
+    private long sumAllCalculatedBonusFrom(List<? extends PasswordIntoBonus> scorableblePassword, String rawPassword) {
+	return scorableblePassword.stream()
+		.map(scoreFromPassword(rawPassword))
+		.reduce(this::toSumOfAllResults)
+		.orElse(0l);
+    }
+    
+    private Function<PasswordIntoBonus, Long> scoreFromPassword(String rawPassword) {
+	return passwordIntoBonus -> passwordIntoBonus.getTotalBonusFrom(rawPassword);
+    }
+    
+    private Long toSumOfAllResults(Long last, Long actual) {
+	return last + actual;
+    }
+    
+    private long scoreIntoPercentageBoundaries(long rawScore) {
+	if(rawScore < SMALLEST_BOUNDARY) {
+  	    return SMALLEST_BOUNDARY;
+  	} else if(rawScore > HIGHEST_BOUNDARY) {
+  	    return HIGHEST_BOUNDARY;
+  	} else {
+  	    return rawScore;
+  	}
+  }
 }

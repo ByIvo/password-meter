@@ -73,4 +73,20 @@ public class PasswordScoreCalculatorTest {
 	long passwordScore = passwordScoreCalculator.calculateScoreOf(RAW_PASSWORD);
 	assertThat(passwordScore, is(2l));
     }
+    
+    @Test
+    public void shouldReturn0IfTheFinalScoreCalculationIsNegative() throws Exception {
+	when(firstDeduction.getTotalBonusFrom(RAW_PASSWORD)).thenReturn(10l);
+	long passwordScore = passwordScoreCalculator.calculateScoreOf(RAW_PASSWORD);
+	
+	assertThat(passwordScore, is(0l));
+    }
+    
+    @Test
+    public void shouldReturn100IfTheFinalScoreCalcutionIsGreaterThan100() throws Exception {
+	when(firstAdition.getTotalBonusFrom(RAW_PASSWORD)).thenReturn(101l);
+	long passwordScore = passwordScoreCalculator.calculateScoreOf(RAW_PASSWORD);
+	
+	assertThat(passwordScore, is(100l));
+    }
 }
