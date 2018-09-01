@@ -6,7 +6,7 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rocks.byivo.passwordmeter.measure.score.aditions.PasswordScoreAdition;
+import rocks.byivo.passwordmeter.measure.score.additions.PasswordScoreAddition;
 import rocks.byivo.passwordmeter.measure.score.deductions.PasswordScoreDeduction;
 
 @Service
@@ -15,11 +15,11 @@ public class PasswordScoreCalculator {
     private static final long SMALLEST_BOUNDARY = 0l;
     private static final long HIGHEST_BOUNDARY = 100l;
     
-    private List<PasswordScoreAdition> scoreAditions;
+    private List<PasswordScoreAddition> scoreAditions;
     private List<PasswordScoreDeduction> scoreDeductions;
 
     @Autowired
-    public PasswordScoreCalculator(List<PasswordScoreAdition> scoreAditions,
+    public PasswordScoreCalculator(List<PasswordScoreAddition> scoreAditions,
 	    List<PasswordScoreDeduction> scoreDeductions) {
 	super();
 	this.scoreAditions = scoreAditions;

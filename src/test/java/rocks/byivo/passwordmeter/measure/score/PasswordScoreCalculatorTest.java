@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import rocks.byivo.passwordmeter.measure.score.aditions.PasswordScoreAdition;
+import rocks.byivo.passwordmeter.measure.score.additions.PasswordScoreAddition;
 import rocks.byivo.passwordmeter.measure.score.deductions.PasswordScoreDeduction;
 
 @RunWith(SpringRunner.class)
@@ -25,14 +25,14 @@ public class PasswordScoreCalculatorTest {
     private PasswordScoreCalculator passwordScoreCalculator;
     
     @Mock
-    private PasswordScoreAdition firstAdition, secondAdition;
+    private PasswordScoreAddition firstAdition, secondAdition;
     
     @Mock
     private PasswordScoreDeduction firstDeduction, secondDeduction;
 
     @Before
     public void setUp() {
-	List<PasswordScoreAdition> allAditions = Arrays.asList(firstAdition, secondAdition);
+	List<PasswordScoreAddition> allAditions = Arrays.asList(firstAdition, secondAdition);
 	List<PasswordScoreDeduction> allDeductions = Arrays.asList(firstDeduction, secondDeduction);
 	
 	passwordScoreCalculator = new PasswordScoreCalculator(allAditions, allDeductions);
