@@ -3,6 +3,7 @@ package rocks.byivo.passwordmeter.measure;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static rocks.byivo.passwordmeter.model.PasswordComplexity.VERY_STRONG;
+import static rocks.byivo.passwordmeter.model.PasswordComplexity.VERY_WEAK;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,5 +41,22 @@ public class PasswordMeterControllerIT {
 		.body("score", equalTo(100))
 		.body("complexity", equalTo(VERY_STRONG.toString()));
     }
+    
+    @Test
+    public void 
+    should_have_the_worst_score_and_complexity_when_all_letters_are_equals() {
+	given()
+		.contentType(ContentType.JSON)
+		.body(new PasswordMeasureRequest("aaaaaaaaaa"))
+	.when()
+		.post("/measure")
+	.then()
+		.statusCode(200)
+		.body("score", equalTo(0))
+		.body("complexity", equalTo(VERY_WEAK.toString()));
+    }
+    
+    //SENHA NULLA
+    //SENHA VAZIA
 
 }
