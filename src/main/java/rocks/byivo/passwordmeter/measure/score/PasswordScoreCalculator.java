@@ -1,7 +1,6 @@
 package rocks.byivo.passwordmeter.measure.score;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,19 +47,10 @@ public class PasswordScoreCalculator {
     }
     
     private long sumAllCalculatedBonusFrom(List<? extends PasswordIntoBonus> scorableblePassword, String rawPassword) {
-	scorableblePassword.stream().forEach(passwordIntoBonus -> printResutl(passwordIntoBonus, rawPassword));
-	
 	return scorableblePassword.stream()
 		.map(scoreFromPassword(rawPassword))
 		.reduce(this::toSumOfAllResults)
 		.orElse(0l);
-    }
-    
-    private void printResutl(PasswordIntoBonus passwordIntoBonus, String rawPassword) {
-	String nameOfClass = passwordIntoBonus.getClass().getSimpleName();
-	long score = passwordIntoBonus.getTotalBonusFrom(rawPassword);
-	
-	System.out.println(String.format("%s \t\t---> %s", nameOfClass, score));
     }
     
     private Function<PasswordIntoBonus, Long> scoreFromPassword(String rawPassword) {

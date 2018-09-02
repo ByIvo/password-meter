@@ -57,4 +57,9 @@ public class RepeatedCharactersDeductionTest {
 	assertThat(totalDeductionFromPassword, is(25l));
     }
     
+    @Test
+    public void shouldNotConsiderSpacesAsRepetitions() throws Exception {
+	long totalDeductionFromPassword = repeatedCharactersDeduction.getTotalBonusFrom("           ");
+	assertThat(totalDeductionFromPassword, is(0l));
+    }
 }

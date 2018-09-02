@@ -28,6 +28,12 @@ public class NumbersOnlyDeductionTest {
     }
     
     @Test
+    public void shouldScoreZeroIfThePasswordIsComposedOnlyBySpaces() {
+	long bonusFromOnlyNumber = numbersOnlyDeduction.getTotalBonusFrom("     ");
+	assertThat(bonusFromOnlyNumber, is(0L));
+    }
+    
+    @Test
     public void ifThereIsALetterShouldScore0() {
 	long bonusFromOnlyNumber = numbersOnlyDeduction.getTotalBonusFrom("156478a");
 	assertThat(bonusFromOnlyNumber, is(0L));

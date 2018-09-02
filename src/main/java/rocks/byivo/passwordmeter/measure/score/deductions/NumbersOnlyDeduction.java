@@ -11,6 +11,20 @@ public class NumbersOnlyDeduction implements PasswordScoreDeduction {
     
     @Override
     public long getTotalBonusFrom(String rawPassword) {
+	boolean isOnlySpacesPassword = isOnlySpacesPassword(rawPassword);
+
+	if (isOnlySpacesPassword) {
+	    return 0;
+	} else {
+	    return scoreAllNumbersAndSpaceIn(rawPassword);
+	}
+    }
+
+    private boolean isOnlySpacesPassword(String rawPassword) {
+	return rawPassword.trim().isEmpty();
+    }
+
+    private long scoreAllNumbersAndSpaceIn(String rawPassword) {
 	long countOfNumbersAndSpaces = countNumbersAndSpacesIn(rawPassword);
 	
 	boolean passwordIsOnlyNumbersAndSpaces = countOfNumbersAndSpaces == rawPassword.length();

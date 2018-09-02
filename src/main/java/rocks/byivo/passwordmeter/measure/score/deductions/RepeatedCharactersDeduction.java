@@ -7,12 +7,17 @@ public class RepeatedCharactersDeduction implements PasswordScoreDeduction {
 
     @Override
     public long getTotalBonusFrom(String rawPassword) {
-	int passwordLength = rawPassword.length();
+	String passwordWithNoSpaces = rawPassword.replace(" ", "");
+	return calculateScoreFrom(passwordWithNoSpaces);
+    }
+
+    private long calculateScoreFrom(String normalizedPassword) {
+	int passwordLength = normalizedPassword.length();
 	RepetetitionFinalScore finalScore = new RepetetitionFinalScore(passwordLength);
 	
 	for (int i = 0; i < passwordLength; i++) {
 
-	    InnerSequenceScore resultOfSumByRepeatedDistance = findAllRepetitionsOfActualIndexCharacter(rawPassword, i);
+	    InnerSequenceScore resultOfSumByRepeatedDistance = findAllRepetitionsOfActualIndexCharacter(normalizedPassword, i);
 	    if (resultOfSumByRepeatedDistance.foundRepeated()) {
 		finalScore = finalScore.sumRepeatedScore(resultOfSumByRepeatedDistance.totalInnerScore);
 	    }

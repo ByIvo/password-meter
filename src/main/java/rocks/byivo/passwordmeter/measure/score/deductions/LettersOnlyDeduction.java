@@ -11,6 +11,20 @@ public class LettersOnlyDeduction implements PasswordScoreDeduction {
     
     @Override
     public long getTotalBonusFrom(String rawPassword) {
+	boolean isOnlySpacesPassword = isOnlySpacesPassword(rawPassword);
+	
+	if(isOnlySpacesPassword) {
+	    return 0;
+	} else {
+	    return scoreAllLettersAndSpacesIn(rawPassword);
+	}
+    }
+
+    private boolean isOnlySpacesPassword(String rawPassword) {
+	return rawPassword.trim().isEmpty();
+    }
+
+    private long scoreAllLettersAndSpacesIn(String rawPassword) {
 	long countOfLettersAndSpaces = countLettersAndSpaceIn(rawPassword);
 	
 	boolean passwordIsOnlyLettersAndSpaces = countOfLettersAndSpaces == rawPassword.length();
@@ -26,5 +40,5 @@ public class LettersOnlyDeduction implements PasswordScoreDeduction {
 	RegexMatchCounter regexMatchCounter = new RegexMatchCounter(LETTER_COUNTER_REGEX);
 	return regexMatchCounter.countMatchesIn(rawPassword);
     }
-
+    
 }
