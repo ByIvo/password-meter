@@ -17,11 +17,20 @@ public class PasswordMeterServiceImpl implements PasswordMeterService {
     private PasswordScoreCalculator passwordScoreCalculator;
 
     public PasswordMeasureResult measure(PasswordMeasureRequest passwordMeasureRequest) {
-	String rawPassword = passwordMeasureRequest.getRawPassword();
+	
+	if(passwordMeasureRequest.isPasswordProvided()) {
+	    return PasswordMeasureResult.NOT_POSSIBLE_TO_MEASURE;
+	} else {
+	    return measureTheProvidedPassword(passwordMeasureRequest);
+	}
+    }
 
+    private PasswordMeasureResult measureTheProvidedPassword(PasswordMeasureRequest passwordMeasureRequest) {
+	String rawPassword = passwordMeasureRequest.getRawPassword();
+	
 	long passwordScore = passwordScoreCalculator.calculateScoreOf(rawPassword);
 	PasswordComplexity passwordComplexity = chooseComplexityFromScore(passwordScore);
-
+	
 	return new PasswordMeasureResult(passwordScore, passwordComplexity);
     }
 

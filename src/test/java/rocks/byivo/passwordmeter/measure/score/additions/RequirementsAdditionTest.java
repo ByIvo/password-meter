@@ -4,9 +4,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static rocks.byivo.passwordmeter.model.Requirement.HAS_LOWERCASE_LETTER;
-import static rocks.byivo.passwordmeter.model.Requirement.HAS_SYMBOLS;
-import static rocks.byivo.passwordmeter.model.Requirement.HAS_UPPERCASE_LETTER;
+import static rocks.byivo.passwordmeter.model.Requirement.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,12 +44,49 @@ public class RequirementsAdditionTest {
 	List<Requirement> passedRequirements = Arrays.asList(
 		HAS_LOWERCASE_LETTER, 
 		HAS_SYMBOLS, 
+		HAS_UPPERCASE_LETTER,
+		HAS_MINIMUM_LENGTH);
+	
+	when(requirementChecker.checkForReachedRequirementsIn(RAW_PASSWORD)).thenReturn(passedRequirements);
+	
+	long bonusForPassedRequirements = requirementsAddition.getTotalBonusFrom(RAW_PASSWORD);
+	assertThat(bonusForPassedRequirements, is(8L));
+    }
+    
+    @Test
+    public void shouldMaximumScoreWhenAllRequirementsPasses() {
+	List<Requirement> passedRequirements = Arrays.asList(Requirement.values());
+	
+	when(requirementChecker.checkForReachedRequirementsIn(RAW_PASSWORD)).thenReturn(passedRequirements);
+	
+	long bonusForPassedRequirements = requirementsAddition.getTotalBonusFrom(RAW_PASSWORD);
+	assertThat(bonusForPassedRequirements, is(10L));
+    }
+    
+    @Test
+    public void shouldScoreNoneIfMinimunLengthIsNotPresent() throws Exception {
+	List<Requirement> passedRequirements = Arrays.asList(
+		HAS_LOWERCASE_LETTER, 
+		HAS_SYMBOLS, 
 		HAS_UPPERCASE_LETTER);
 	
 	when(requirementChecker.checkForReachedRequirementsIn(RAW_PASSWORD)).thenReturn(passedRequirements);
 	
 	long bonusForPassedRequirements = requirementsAddition.getTotalBonusFrom(RAW_PASSWORD);
-	assertThat(bonusForPassedRequirements, is(6L));
+	assertThat(bonusForPassedRequirements, is(0L));
     }
-
+    
+    @Test
+    public void shouldScoreNoneIfDidNotPassInThreeDifferentRequirementsBesidesTheMinimumLength() throws Exception {
+	List<Requirement> passedRequirements = Arrays.asList(
+		HAS_LOWERCASE_LETTER,  
+		HAS_UPPERCASE_LETTER,
+		HAS_MINIMUM_LENGTH);
+	
+	when(requirementChecker.checkForReachedRequirementsIn(RAW_PASSWORD)).thenReturn(passedRequirements);
+	
+	long bonusForPassedRequirements = requirementsAddition.getTotalBonusFrom(RAW_PASSWORD);
+	assertThat(bonusForPassedRequirements, is(0L));
+    }
+    
 }

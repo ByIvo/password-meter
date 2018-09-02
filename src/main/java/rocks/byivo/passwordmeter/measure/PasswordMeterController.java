@@ -18,7 +18,7 @@ public class PasswordMeterController {
     private PasswordMeterService passwordMeasureService;
     
     @RequestMapping(path = "/measure", method = POST)
-    public PasswordMeasureResult measure(@RequestBody PasswordMeasureRequest passwordRequest) {
+    public PasswordMeasureResult measure(@RequestBody(required = true) PasswordMeasureRequest passwordRequest) {
 	return passwordMeasureService.measure(passwordRequest);
     }
 }

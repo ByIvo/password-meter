@@ -1,5 +1,6 @@
 package rocks.byivo.passwordmeter.model;
 
+import java.beans.Transient;
 import java.io.Serializable;
 
 public class PasswordMeasureRequest implements Serializable {
@@ -20,6 +21,11 @@ public class PasswordMeasureRequest implements Serializable {
 
     public void setRawPassword(String rawPassword) {
 	this.rawPassword = rawPassword;
+    }
+    
+    @Transient
+    public boolean isPasswordProvided() {
+	return rawPassword == null || rawPassword.isEmpty();
     }
 
 }

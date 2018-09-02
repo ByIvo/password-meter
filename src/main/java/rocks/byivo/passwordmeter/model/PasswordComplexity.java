@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum PasswordComplexity {
+    TOO_SHORT("Too Short"),
     VERY_WEAK("Very Weak"), 
     WEAK("Weak"), 
     GOOD("Good"), 

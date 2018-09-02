@@ -1,5 +1,7 @@
 package rocks.byivo.passwordmeter.measure.score.additions;
 
+import static rocks.byivo.passwordmeter.model.Requirement.HAS_MINIMUM_LENGTH;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,21 @@ public class RequirementsAddition implements PasswordScoreAddition {
     @Override
     public long getTotalBonusFrom(String rawPassword) {
 	List<Requirement> passedRequirements = requirementChecker.checkForReachedRequirementsIn(rawPassword);
-	return passedRequirements.size() * 2;
+	
+	boolean hasTheMinimumRequirements = hasTheMinimumRequirementsToScore(passedRequirements);
+	
+	if(hasTheMinimumRequirements) {
+	    return passedRequirements.size() * 2;
+	} else {
+	    return 0;
+	}
+    }
+
+    private boolean hasTheMinimumRequirementsToScore(List<Requirement> passedRequirements) {
+	boolean hasMinimumLength = passedRequirements.contains(HAS_MINIMUM_LENGTH);
+	boolean passedOtherThreeRequirements = passedRequirements.size() > 3;
+	
+	return hasMinimumLength && passedOtherThreeRequirements;
     }
 
 }
