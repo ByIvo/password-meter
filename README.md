@@ -21,7 +21,7 @@ To run the application, type in your CLI
 ```sh
 docker run --rm -i -p8080:8080 password-meter
 ```
-After that, just open http://localhost:8080/password-meter and verify your password strength
+After that, open http://localhost:8080/password-meter and verify your password strength
 
 # How to create new features
 
@@ -32,7 +32,7 @@ mvn test
 ```
 
 ## It is a maven project
-Just import as a new maven project in your favorite IDE
+Just import as a existing maven project in your favorite IDE
 
 ## The client
 The front-end files are coupled with back-end files; They're all cointaned in resources folder.
