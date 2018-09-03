@@ -8,7 +8,7 @@
     passwordCheckerService.prototype.$inject = ['$resource'];
 
     function passwordCheckerService($resource) {
-        var resource = $resource('/measure');
+        var resource = $resource(window.location.origin + window.location.pathname + 'measure');
 
         return  {
             measure: measure
