@@ -1,0 +1,30 @@
+{
+  "name": "password-strenght-checker",
+  "version": "1.0.0",
+  "description": "Client to consume Password Checker API and validate your password strenght",
+  "main": "index.js",
+  "scripts": {
+    "install": "bower install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ByIvo/password-meter.git"
+  },
+  "keywords": [
+    "password",
+    "checker"
+  ],
+  "author": "ByIvo <irbatistela@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ByIvo/password-meter/issues"
+  },
+  "homepage": "https://github.com/ByIvo/password-meter#readme",
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-less": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}

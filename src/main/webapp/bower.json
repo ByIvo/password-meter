@@ -1,0 +1,27 @@
+{
+  "name": "password-strenght-checker",
+  "description": "Client to consume Password Checker API and validate your password strenght",
+  "main": "index.js",
+  "authors": [
+    "ByIvo <irbatistela@gmail.com>"
+  ],
+  "license": "GPL-3.0",
+  "keywords": [
+    "password",
+    "checker"
+  ],
+  "homepage": "https://github.com/ByIvo/password-meter",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.3",
+    "bootstrap": "3.3",
+    "angular-resource": "^1.7.3"
+  }
+}
