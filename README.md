@@ -1,4 +1,7 @@
 # password-meter
+[![Build Status](https://travis-ci.org/ByIvo/password-meter.svg?branch=master)](https://travis-ci.org/ByIvo/password-meter)
+[![Coverage Status](https://coveralls.io/repos/github/ByIvo/password-meter/badge.svg?branch=master)](https://coveralls.io/github/ByIvo/password-meter?branch=master)
+
 A spring project to measure your password strength
 
 # How to run in your local machine
