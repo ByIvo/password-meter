@@ -21,4 +21,5 @@ public class PasswordMeterController {
     public PasswordMeasureResult measure(@RequestBody(required = true) PasswordMeasureRequest passwordRequest) {
 	return passwordMeasureService.measure(passwordRequest);
     }
+    
 }

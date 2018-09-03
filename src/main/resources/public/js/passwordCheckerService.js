@@ -8,7 +8,7 @@
     passwordCheckerService.prototype.$inject = ['$resource'];
 
     function passwordCheckerService($resource) {
-        var resource = $resource('http://localhost:8080/measure');
+        var resource = $resource('/measure');
 
         return  {
             measure: measure
