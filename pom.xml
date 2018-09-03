@@ -43,6 +43,7 @@
 	</properties>
 
 	<build>
+	  <finalName>password-meter</finalName>
 		<plugins>
 			<plugin>
 		    		<groupId>org.eluder.coveralls</groupId>
