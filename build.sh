@@ -1,6 +1,6 @@
 #!/bin/bash
 echo 'FIRST npm install'
-cd src/main/webapp
+cd src/main/resources
 npm install
 npx bower install
 npx grunt dist
