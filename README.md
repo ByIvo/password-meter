@@ -16,7 +16,7 @@ To run in your local machine (considering you alredy installed the required tool
 When the build process finish, a docker image call *password-meter* will be created with the port 8080 exposed
 To run the application, type in your CLI
 ```sh
-docker run -i password-meter
+docker run --rm -i -p8080:8080 password-meter
 ```
 After that, just open http://localhost:8080/password-meter-0.0.1-SNAPSHOT and verify your password strength
 
