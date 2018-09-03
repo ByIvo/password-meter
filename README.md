@@ -26,7 +26,14 @@ After that, open http://localhost:8080/password-meter and verify your password s
 # How to create new features
 
 ## Test is important
-Remember to always run all tests before the commit; You can do it typing
+Remember to always run all tests before the commit; 
+
+To run all integration tests, type in your CLI:
+```sh
+mvn integration-test -P integration
+```
+
+To run unit tests, type in your CLI:
 ```sh
 mvn test
 ```
