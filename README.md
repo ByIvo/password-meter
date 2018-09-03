@@ -32,7 +32,7 @@ mvn test
 Just import as a new maven project in your favorite IDE
 
 ## The client
-The front-end files are coupled with back-end files; They're all cointaned in webapp folder.
+The front-end files are coupled with back-end files; They're all cointaned in resources folder.
 Grunt is needed in less files compilation, so open a CLI and, in webapp folder, and type:
 ```sh
 grunt
