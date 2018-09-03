@@ -7,9 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContextPathConfig implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
 
+    public static final String BASE_PATH = "/password-meter";
+    
     @Override
     public void customize(ConfigurableServletWebServerFactory factory) {
-	factory.setContextPath("/password-meter");
+	factory.setContextPath(BASE_PATH);
     }
 
 }
