@@ -28,14 +28,14 @@ After that, open http://localhost:8080/password-meter and verify your password s
 ## Test is important
 Remember to always run all tests before the commit; 
 
-To run all integration tests, type in your CLI:
-```sh
-mvn integration-test -P integration
-```
-
 To run unit tests, type in your CLI:
 ```sh
 mvn test
+```
+
+To run all integration tests, type in your CLI:
+```sh
+mvn integration-test -P integration
 ```
 
 ## It is a maven project
