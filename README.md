@@ -21,7 +21,7 @@ To run the application, type in your CLI
 ```sh
 docker run --rm -i -p8080:8080 password-meter
 ```
-After that, just open http://localhost:8080/password-meter-0.0.1-SNAPSHOT and verify your password strength
+After that, just open http://localhost:8080/password-meter and verify your password strength
 
 # How to create new features
 
